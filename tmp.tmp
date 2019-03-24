@@ -1,0 +1,17 @@
+WordGuessCaptcha
+payload: XdcFlL
+render_json: png image 
+render_html: 
+validate(XdcFlL)
+
+AwesomeCaptcha
+payload: [{ class: :fa-icon }, { class: :fa-icon-1 }, { class: :fa-icon-2 }]
+visual: <ul><li><a href="#" value="sefs"><i class="fooboobar">sdfs</i></a></li></ul>
+validate(1)
+
+SimpleMathCaptcha
+payload: 5 + 3
+visual: 5 plus 3
+validate(8)
+
+

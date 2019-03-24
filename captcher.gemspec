@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", "~> 5.2.2", ">= 5.2.2.1"
   spec.add_dependency "mini_magick"
 
+  spec.add_development_dependency "rubocop"
   spec.add_development_dependency "rb-readline"
   spec.add_development_dependency "pry-rails"
   spec.add_development_dependency "rspec-rails"
