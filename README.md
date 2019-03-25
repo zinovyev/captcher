@@ -2,6 +2,7 @@
 
 Easy to use classical captcha for Rails apps
 
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -28,6 +29,7 @@ $ gem install captcher
 
 ```
 
+
 ## Usage
 
 ### Render on page
@@ -38,6 +40,28 @@ $ gem install captcher
 ## Contributing
 
 Contribution directions go here.
+
+
+## Fonts
+
+The fonts wich are shiped by default with this repo
+are taken from https://github.com/google/fonts
+and use the SIL Open Font License, v1.1
+
+**There's a list of the origin paths of the fonts**:
+
+* https://github.com/google/fonts/tree/master/ofl/bangers
+
+* https://github.com/google/fonts/tree/master/ofl/carterone
+
+* https://github.com/google/fonts/tree/master/ofl/frederickathegreat
+
+* https://github.com/google/fonts/tree/master/ofl/indieflower
+
+* https://github.com/google/fonts/tree/master/ofl/lobstertwo
+
+* https://github.com/google/fonts/tree/master/ofl/sigmarone
+
 
 ## License
 

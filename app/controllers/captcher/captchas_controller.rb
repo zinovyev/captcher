@@ -18,14 +18,5 @@ module Captcher
         render json: { success: false }, status: 422
       end
     end
-
-    private
-
-    def render_captcha(captcha)
-      format = params[:format] || captcha.own_config[:format]
-      filename = "captcha.#{format}"
-      type = "image/#{format}"
-      send_data captcha.represent, filename: filename, type: type, disposition: :inline
-    end
   end
 end

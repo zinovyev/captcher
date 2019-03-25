@@ -17,5 +17,14 @@ module Captcher
       captcha.validate(confirmation)
     end
     alias confirm_captcha? confirm_captcha
+
+    private
+
+    def render_captcha(captcha)
+      format = params[:format] || captcha.own_config[:format]
+      filename = "captcha.#{format}"
+      type = "image/#{format}"
+      send_data captcha.represent, filename: filename, type: type, disposition: :inline
+    end
   end
 end
