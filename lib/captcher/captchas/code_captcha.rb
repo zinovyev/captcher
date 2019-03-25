@@ -1,50 +1,27 @@
 module Captcher
   module Captchas
     class CodeCaptcha < BaseCaptcha
-      SPECIAL_CHAR_CODES = (91..96)
+      SPECIAL_CHAR_CODES = (91..96).freeze
+
       self.name = :code_captcha
 
+      # rubocop:disable Naming/MemoizedInstanceVariableName
       def after_initialize
         @payload ||= random_text
       end
+      # rubocop:enable Naming/MemoizedInstanceVariableName
 
-      # rubocop:disable Metrics/AbcSize
-      def represent(format = :html, _options = {})
-        MiniMagick::Tool::Convert.new do |i|
-          i.font random_font
-          i.size image_size
-          i.pointsize own_config[:font_size]
-          i.fill own_config[:font_color]
-          i.gravity "center"
-          i.canvas "#{own_config[:background]}"
-          i.draw "text 0,0 '#{@payload}'"
-          i.noise.+("Gaussian")
-          i << "#{own_config[:format]}:-"
-        end
+      # rubocop:disable Lint/UnusedMethodArgument
+      def represent(format = :html, options = {})
+        Captcher::TextImage.new(@payload, own_config).generate
       end
-      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Lint/UnusedMethodArgument
 
       def validate(confirmation)
-        confirmation.to_s.strip.downcase == @payload.downcase
+        confirmation.to_s.strip.casecmp(@payload).zero?
       end
 
       private
-
-      def image_size
-        "#{image_width}x#{image_height}"
-      end
-
-      def image_height
-        own_config[:font_size] + 10
-      end
-
-      def image_width
-        own_config[:font_size] * own_config[:count] + 10
-      end
-
-      def random_font
-        own_config[:fonts].sample
-      end
 
       def random_text
         @random_text ||= Array.new(own_config[:count]).map { random_char }.join("")

@@ -1,6 +1,7 @@
 require "mini_magick"
 require "captcher/engine"
 require "captcher/config"
+require "captcher/text_image"
 require "captcher/base_captcha"
 require "captcher/captchas/awesome_captcha"
 require "captcher/captchas/math_captcha"
@@ -27,14 +28,7 @@ module Captcher
     @captcha_class = "Captcher::Captchas::#{klass}".constantize
   end
 
-  def build_captcha(session)
-    if session[Captcher::BaseCaptcha::SESSION_KEY]
-      captcha_class.restore(session)
-    else
-      captcha_class.new(config: config)
-      captcha_class.store(session)
-    end
-  end
+  private
 
   # rubocop:disable Metrics/MethodLength
   def default_config

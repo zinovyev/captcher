@@ -11,9 +11,7 @@ module Captcher
       end
 
       def restore_or_create(config, session)
-        state = session[SESSION_KEY]
-        state ||= { config: config }
-        new(state).store(session)
+        restore(session) || new(config: config).store(session)
       end
     end
 
