@@ -1,10 +1,11 @@
 require "mini_magick"
 require "captcher/engine"
 require "captcher/config"
-
-if Rails.env.in?(["development", "test"])
-  require "pry"
-end
+require "captcher/base_captcha"
+require "captcher/captchas/awesome_captcha"
+require "captcher/captchas/math_captcha"
+require "captcher/captchas/code_captcha"
+require "pry" if Rails.env.in?(%w[development test])
 
 module Captcher
   extend self

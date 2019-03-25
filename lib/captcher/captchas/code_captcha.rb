@@ -25,7 +25,7 @@ module Captcher
       # rubocop:enable Metrics/AbcSize
 
       def validate(confirmation)
-        confirmation.strip.downcase == @payload.downcase
+        confirmation.to_s.strip.downcase == @payload.downcase
       end
 
       private

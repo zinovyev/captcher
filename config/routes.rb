@@ -1,9 +1,9 @@
 Captcher::Engine.routes.draw do
-  resource :captcha, only: %i[show create] do
+  resource :captcha, only: [:show] do
     member do
-      %i[post get].each do |http_method|
-        send(http_method, "refresh")
-        send(http_method, "validate")
+      %i[reload refresh confirm].each do |route|
+        send :post, route
+        send :get, route
       end
     end
   end
