@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.version     = Captcher::VERSION
   spec.authors     = ["Ivan Zinovyev"]
   spec.email       = ["vanyazin@gmail.com"]
-  spec.homepage    = "https://github.com/zinovyev"
-  spec.summary     = "Summary of Captcher."
-  spec.description = "Description of Captcher."
+  spec.homepage    = "https://github.com/zinovyev/captcher"
+  spec.summary     = "Captcha for Rails"
+  spec.description = "Easy to use classical captcha for Rails apps"
   spec.license     = "MIT"
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
