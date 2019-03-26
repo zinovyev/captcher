@@ -22,12 +22,13 @@ module Captcher
     default_config.merge(@config)
   end
 
-  def captcha_class(mode = nil)
-    return @captcha_class if @captcha_class
+  def captcha_class
+    @captcha_class ||= select_captcha_class(Captcher.config[:mode])
+  end
 
-    mode ||= Captcher.config[:mode]
-    klass = mode.to_s.camelize
-    @captcha_class = "Captcher::Captchas::#{klass}".constantize
+  def select_captcha_class(name)
+    klass = name.to_s.camelize
+    "Captcher::Captchas::#{klass}".constantize
   end
 
   private
@@ -35,7 +36,7 @@ module Captcher
   # rubocop:disable Metrics/MethodLength
   def default_config
     @default_config ||= Captcher::Config.new do |c|
-      c.mode = :code_captcha
+      c.mode = :cached_captcha
 
       c.code_captcha do |cc|
         cc.fonts Dir[Captcher::Engine.root.join("lib/fonts/**")]

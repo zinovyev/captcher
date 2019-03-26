@@ -32,7 +32,7 @@ module Captcher
       private
 
       def wrapped_class
-        Captcher.captcha_class(own_config[:wrapped])
+        Captcher.select_captcha_class(own_config[:wrapped])
       end
 
       def representation_key
