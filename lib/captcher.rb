@@ -6,6 +6,7 @@ require "captcher/base_captcha"
 require "captcher/captchas/awesome_captcha"
 require "captcher/captchas/math_captcha"
 require "captcher/captchas/code_captcha"
+require "captcher/captchas/cached_captcha"
 require "pry" if Rails.env.in?(%w[development test])
 
 module Captcher
@@ -21,10 +22,11 @@ module Captcher
     default_config.merge(@config)
   end
 
-  def captcha_class
+  def captcha_class(mode = nil)
     return @captcha_class if @captcha_class
 
-    klass = Captcher.config[:mode].to_s.camelize
+    mode ||= Captcher.config[:mode]
+    klass = mode.to_s.camelize
     @captcha_class = "Captcher::Captchas::#{klass}".constantize
   end
 
@@ -42,6 +44,11 @@ module Captcher
         cc.count 5
         cc.background "#999999"
         cc.format "png"
+      end
+
+      c.cached_captcha do |cc|
+        cc.slots_count 10
+        cc.wrapped :code_captcha
       end
 
       c.math_captcha do |mc|

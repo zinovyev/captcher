@@ -39,7 +39,7 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    # Helpers.remove_tmp_dir
+    Helpers.remove_tmp_dir
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
