@@ -19,9 +19,11 @@ module Captcher
 
       # rubocop:disable Lint/UnusedMethodArgument
       def represent(format = :html, options = {})
-        Rails.cache.fetch(representation_key, expires_in: CACHE_TTL) do
-          @wrapped.represent
+        cache_options = { expires_in: CACHE_TTL, race_condition_ttl: 10 }
+        representation = Rails.cache.fetch(representation_key, cache_options) do
+          Base64.encode64(@wrapped.represent)
         end
+        Base64.decode64(representation)
       end
       # rubocop:enable Lint/UnusedMethodArgument
 
