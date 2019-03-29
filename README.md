@@ -69,13 +69,13 @@ end
 
 class MyController < ApplicationController
   def index
-    reload_captcha(session) # Reload the captcha
+    reload_captcha # Reload the captcha
     # render response with success code ...
   end
 
   def create
     @comment = Comment.new(comment_params)
-    captcha_check = confirm_captcha?(session, params[:captcha])
+    captcha_check = confirm_captcha?(params[:captcha])
     if @comment.valid? && captcha_check && @comment.save
       # render response with success code ...
     else
